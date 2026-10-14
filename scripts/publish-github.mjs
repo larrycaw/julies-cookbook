@@ -16,23 +16,9 @@ try {
   const dirty = run("git", ["status", "--porcelain"]);
   if (dirty) throw new Error("Commit endringene før publisering. Skriptet publiserer bare gjeldende commit.");
   run("git", ["rev-parse", "--verify", "HEAD"]);
-  const lookup = spawnSync("gh", ["api", `repos/${repo}`], { cwd: root, encoding: "utf8" });
-  if (lookup.error) throw lookup.error;
-  if (lookup.status !== 0) {
-    if (!(lookup.stderr || "").includes("HTTP 404")) throw new Error(lookup.stderr || "Kunne ikke undersøke repositoryet.");
-    run("gh", ["repo", "create", repo, "--public", "--description", "Julies digitale kokebok"]);
-  }
+  run("gh", ["repo", "view", repo, "--json", "nameWithOwner"]);
   // Normal push refuses unrelated history and never force-overwrites main.
-  run("git", ["push", remote, "HEAD:main"], { stdio: "inherit" });
-  const pages = spawnSync("gh", ["api", `repos/${repo}/pages`], { cwd: root, encoding: "utf8" });
-  if (pages.error) throw pages.error;
-  if (pages.status !== 0) {
-    if (!(pages.stderr || "").includes("HTTP 404")) throw new Error(pages.stderr || "Kunne ikke undersøke Pages-oppsettet.");
-    run("gh", ["api", `repos/${repo}/pages`, "--method", "POST", "-f", "build_type=workflow"]);
-  } else if (JSON.parse(pages.stdout).build_type !== "workflow") {
-    throw new Error("Repositoryet bruker allerede et annet Pages-oppsett. Velg GitHub Actions i Settings → Pages før videre publisering.");
-  }
-  run("gh", ["workflow", "run", "pages.yml", "--repo", repo, "--ref", "main"]);
+  run("git", ["-c", "credential.helper=!gh auth git-credential", "push", remote, "HEAD:main"], { stdio: "inherit" });
   console.log(`Publisering startet. Følg arbeidsflyten på https://github.com/${repo}/actions`);
   console.log("E-postinnlogging og felles lagring må kobles til før kokeboken kan åpnes.");
 } catch (error) {

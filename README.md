@@ -113,22 +113,23 @@ Cloud Functions krever at prosjektet støtter funksjonsdeploy, vanligvis Blaze.
 
 ## GitHub Pages
 
-Demoen bruker det tilkoblede repositoryet `larrycaw/julies-cookbook`.
+Demoen bruker det tilkoblede repositoryet `larrycaw/julies-cookbook` og er
+publisert på <https://larrycaw.github.io/julies-cookbook/>.
 
 1. Bruk `julies-cookbook` under GitHub-kontoen `larrycaw`.
 2. Send denne checkouten til repositoryets `main`-gren.
-3. Velg **Settings → Pages → Source → GitHub Actions**.
+3. Pages er aktivert fra **gh-pages / (root)**. Behold denne innstillingen.
 4. Arbeidsflyten `.github/workflows/pages.yml` kjører tester, bygger appen og
-   publiserer `dist/`. Stien følger repositoryets navn automatisk.
+   sender `dist/` til `gh-pages` og ber GitHub bygge Pages. Stien følger
+   repositoryets navn automatisk.
 
-Med innlogget GitHub CLI og en ren, committet checkout kan disse trinnene
-gjøres med `npm run publish:github`. Skriptet oppretter repositoryet dersom
-det mangler, sender gjeldende commit til `main` og starter Pages-arbeidsflyten.
-Det overskriver ikke eksisterende Git-historikk eller et annet Pages-oppsett.
-Det starter en publisering; resultatet må kontrolleres i GitHub Actions.
+Med innlogget GitHub CLI og en ren, committet checkout kan gjeldende commit
+sendes til `main` med `npm run publish:github`. Pushen starter demo-arbeidsflyten.
+Skriptet overskriver ikke eksisterende Git-historikk. Resultatet kontrolleres
+i GitHub Actions.
 
-Adressen blir normalt <https://larrycaw.github.io/julies-cookbook/>.
-Dette er en forventet adresse, ikke en bekreftet publisering.
+Den publiserte siden er en demo med midlertidige data. E-postinnloggingen og
+felles lagring trenger fortsatt et tilkoblet Firebase-prosjekt.
 
 ## Gjenstående Firebase-arbeid
 
