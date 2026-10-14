@@ -1,0 +1,13 @@
+{
+  "functions": [{
+    "source": "functions",
+    "codebase": "cookbook-auth",
+    "predeploy": ["npm --prefix functions run build"]
+  }],
+  "auth": { "providers": { "emailPassword": true } },
+  "emulators": {
+    "auth": { "host": "127.0.0.1", "port": 9099 },
+    "ui": { "enabled": false },
+    "singleProjectMode": true
+  }
+}

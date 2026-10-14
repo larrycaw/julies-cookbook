@@ -9,3 +9,7 @@
 /.codex/
 /.agents/
 /outputs/
+/functions/node_modules/
+/functions/lib/
+/functions/.env*
+!/functions/.env.example

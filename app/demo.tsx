@@ -9,7 +9,7 @@ setBackend(demo);
 export default function Demo() {
   useEffect(() => () => { demo.dispose(); setBackend(null); }, []);
   return <>
-    <div className="preview-notice" role="status">Forhåndsvisning · Endringer lagres bare mens siden er åpen. Google-innlogging og felles lagring er ikke tilkoblet.</div>
+    <div className="preview-notice" role="status">Forhåndsvisning · Endringer lagres bare mens siden er åpen. Innlogging og felles lagring er ikke tilkoblet.</div>
     <Cookbook displayName="Isak" onSignOut={() => { demo.dispose(); setBackend(null); location.search = ""; }}/>
   </>;
 }

@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
-import { BookOpen, Heart, LockKeyhole } from "lucide-react";
+import EmailLogin from "./email-login";
+import { emailAuth } from "@/lib/auth-config";
 import "./globals.css";
 import "@fontsource/dm-sans/400.css";
 import "@fontsource/dm-sans/500.css";
@@ -10,19 +11,7 @@ import "@fontsource/fraunces/400.css";
 import "@fontsource/fraunces/500.css";
 import "@fontsource/caveat/600.css";
 
-function Entrance() {
-  return <main className="entrance">
-    <div className="entrance-card">
-      <span className="brand-icon"><BookOpen size={31}/><Heart size={12} className="brand-heart" fill="currentColor"/></span>
-      <p className="eyebrow">BARE FOR JULIE & ISAK</p>
-      <h1>Julies kokebok<span className="brand-dot">.</span></h1>
-      <p>Et lite sted for store matminner.<br/>Oppskriftene våre, samlet med kjærlighet.</p>
-      <div className="inline-status" role="status">Vi gjør kokeboken klar. Google-innlogging åpner når tilkoblingen er på plass.</div>
-      <button className="button secondary full-width" disabled>Fortsett med Google</button>
-      <p className="entrance-note"><LockKeyhole size={13}/> Kokeboken er privat for dere to.</p>
-    </div>
-  </main>;
-}
+function Entrance() { return <EmailLogin auth={emailAuth}/>; }
 
 // Preview exists only in Vite development on this machine. Production is locked
 // until the real identity and storage adapter has been configured and verified.

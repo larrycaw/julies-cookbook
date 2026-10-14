@@ -34,7 +34,7 @@ try {
   }
   run("gh", ["workflow", "run", "pages.yml", "--repo", repo, "--ref", "main"]);
   console.log(`Publisering startet. Følg arbeidsflyten på https://github.com/${repo}/actions`);
-  console.log("Google-innlogging og felles lagring må kobles til før inngangen kan åpnes.");
+  console.log("E-postinnlogging og felles lagring må kobles til før kokeboken kan åpnes.");
 } catch (error) {
   console.error(error.message);
   process.exitCode = 1;
