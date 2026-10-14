@@ -1,0 +1,11 @@
+/node_modules/
+/dist/
+/public/ocr/
+/.env*
+!/.env.example
+*.tsbuildinfo
+*-debug.log
+/.firebase/
+/.codex/
+/.agents/
+/outputs/
