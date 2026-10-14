@@ -7,6 +7,17 @@ Denne checkouten viderefører den eksisterende Sites-appen som en statisk
 React/Vite-app for GitHub Pages. Originalen er fortsatt tilgjengelig på
 <https://julies-kokebok.creamyelm32.chatgpt.site> og er ikke endret.
 
+## Offentlig demo
+
+GitHub Pages bygger som standard en demo med `VITE_COOKBOOK_DEMO=1`. Den åpner
+kokeboken direkte med eksempeloppskrifter, redigering, bilder, porsjoner og
+handleliste. Endringer lever bare mens siden er åpen og forsvinner ved reload;
+**Nullstill demo** starter på nytt. Nettimport krever fortsatt en tilkoblet
+server; tekst- og bildeimport kan prøves i demoen.
+
+Demoen initialiserer ikke Firebase og laster ikke ekte kontoer eller data.
+For en vanlig innloggingsbeskyttet byggversjon utelates demo-variabelen.
+
 ## Status
 
 - Utseendet, oppskriftsredigeringen, porsjonsberegningen, handlelisten,
@@ -40,7 +51,7 @@ npm run dev
 
 Åpne adressen Vite skriver ut. Legg til `?preview=1` på localhost for å
 prøve kokebokgrensesnittet med midlertidige data. Forhåndsvisningen er tydelig
-merket og finnes bare i utviklingsmodus. Endringer forsvinner når siden lastes
+merket. Endringer forsvinner når siden lastes
 på nytt. Den er ikke en innlogging og kobler ikke til private data.
 
 ## Kontroller
@@ -52,7 +63,7 @@ npm ci --prefix functions
 npm --prefix functions run build
 npm run test:auth
 npm run test:ocr
-PAGES_BASE_PATH=/julies-kokebok/ npm run build
+PAGES_BASE_PATH=/julies-cookbook/ VITE_COOKBOOK_DEMO=1 npm run build
 ```
 
 Testene dekker norsk porsjonsberegning, ingredienser, importparsing,
@@ -102,11 +113,9 @@ Cloud Functions krever at prosjektet støtter funksjonsdeploy, vanligvis Blaze.
 
 ## GitHub Pages
 
-Målet er `larrycaw/julies-kokebok`. Repositoryet må opprettes før publisering.
-Arbeidsmappen ble opprinnelig klargjort for det tomme `julies-cookbook`-
-repositoryet; ingen kode er sendt dit.
+Demoen bruker det tilkoblede repositoryet `larrycaw/julies-cookbook`.
 
-1. Opprett `julies-kokebok` under GitHub-kontoen `larrycaw`.
+1. Bruk `julies-cookbook` under GitHub-kontoen `larrycaw`.
 2. Send denne checkouten til repositoryets `main`-gren.
 3. Velg **Settings → Pages → Source → GitHub Actions**.
 4. Arbeidsflyten `.github/workflows/pages.yml` kjører tester, bygger appen og
@@ -118,7 +127,7 @@ det mangler, sender gjeldende commit til `main` og starter Pages-arbeidsflyten.
 Det overskriver ikke eksisterende Git-historikk eller et annet Pages-oppsett.
 Det starter en publisering; resultatet må kontrolleres i GitHub Actions.
 
-Adressen blir normalt <https://larrycaw.github.io/julies-kokebok/>.
+Adressen blir normalt <https://larrycaw.github.io/julies-cookbook/>.
 Dette er en forventet adresse, ikke en bekreftet publisering.
 
 ## Gjenstående Firebase-arbeid
